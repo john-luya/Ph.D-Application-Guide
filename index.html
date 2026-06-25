@@ -1,730 +1,290 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>简答题 1-24 精美备考资料</title>
-  <style>
-    :root {
-      --bg: #f6faf7;
-      --paper: #ffffff;
-      --ink: #1f2a25;
-      --muted: #65746d;
-      --line: #d9e6df;
-      --green: #19705b;
-      --green-deep: #0f4f42;
-      --mint: #e7f5ee;
-      --gold: #bf7b16;
-      --gold-soft: #fff4dc;
-      --red: #bd3d31;
-      --shadow: 0 18px 42px rgba(34, 74, 56, .10);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(25,112,91,.12), transparent 34rem),
-        linear-gradient(180deg, #f9fcfa 0%, var(--bg) 45%, #eef7f1 100%);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
-      line-height: 1.65;
-    }
-    a { color: inherit; text-decoration: none; }
-    .hero {
-      min-height: 52vh;
-      display: grid;
-      align-items: center;
-      padding: 52px clamp(18px, 5vw, 72px) 34px;
-      border-bottom: 1px solid var(--line);
-    }
-    .hero-inner {
-      width: min(1160px, 100%);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) 360px;
-      gap: 34px;
-      align-items: end;
-    }
-    .eyebrow {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      color: var(--green-deep);
-      background: var(--mint);
-      border: 1px solid #cde8dc;
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-weight: 700;
-      font-size: 14px;
-    }
-    h1 {
-      margin: 18px 0 16px;
-      font-size: clamp(34px, 6vw, 76px);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-    .lead { max-width: 760px; margin: 0; color: var(--muted); font-size: clamp(16px, 2vw, 20px); }
-    .hero-panel {
-      background: rgba(255,255,255,.88);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-    .hero-panel h2 { margin: 0 0 14px; font-size: 20px; }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .stat { background: #f8fbf9; border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
-    .stat strong { display: block; font-size: 24px; color: var(--green-deep); }
-    .stat span { color: var(--muted); font-size: 13px; }
-    .layout {
-      width: min(1160px, calc(100% - 32px));
-      margin: 28px auto 64px;
-      display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
-      gap: 24px;
-    }
-    .sidebar { position: sticky; top: 18px; align-self: start; }
-    .toolbox, .quick-box {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 10px 28px rgba(34, 74, 56, .07);
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-    .toolbox h2, .quick-box h2 { margin: 0 0 12px; font-size: 18px; }
-    .search {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px 13px;
-      font: inherit;
-      outline: none;
-      background: #fbfdfc;
-    }
-    .search:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(25,112,91,.14); }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-    .chip {
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--ink);
-      border-radius: 999px;
-      padding: 7px 10px;
-      cursor: pointer;
-      font: inherit;
-      font-size: 13px;
-    }
-    .chip.active { background: var(--green); color: white; border-color: var(--green); }
-    .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-    .action-row button {
-      border: 0;
-      border-radius: 8px;
-      padding: 10px;
-      background: var(--green-deep);
-      color: #fff;
-      cursor: pointer;
-      font-weight: 700;
-    }
-    .action-row button.secondary { background: var(--gold); }
-    .progress { margin-top: 12px; color: var(--muted); font-size: 14px; }
-    .bar { height: 9px; background: #e6eee9; border-radius: 999px; overflow: hidden; margin-top: 8px; }
-    .bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #41a775); }
-    .quick-list { display: grid; gap: 8px; max-height: 58vh; overflow: auto; padding-right: 4px; }
-    .quick-pill {
-      display: grid;
-      grid-template-columns: 34px 1fr;
-      gap: 8px;
-      align-items: start;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fbfdfc;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .quick-pill span { color: var(--green-deep); font-weight: 800; }
-    .content { min-width: 0; }
-    .memorize-strip {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-      margin-bottom: 22px;
-    }
-    .memorize-strip h2 { margin: 0 0 10px; font-size: 22px; }
-    .method-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .method { border-left: 4px solid var(--green); background: #f9fcfa; padding: 12px; border-radius: 6px; }
-    .method strong { display: block; }
-    .method span { color: var(--muted); font-size: 14px; }
-    .section-heading {
-      display: flex;
-      align-items: end;
-      gap: 12px;
-      margin: 32px 0 12px;
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 10px;
-    }
-    .section-heading p { margin: 0; color: var(--gold); font-weight: 800; }
-    .section-heading h2 { margin: 0; font-size: 28px; flex: 1; }
-    .section-heading span { color: var(--muted); }
-    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 12px 28px rgba(34, 74, 56, .08);
-      padding: 18px;
-      scroll-margin-top: 24px;
-    }
-    .card.hidden, .study-section.hidden { display: none; }
-    .card-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 12px; }
-    .num {
-      display: inline-grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
-      background: var(--green-deep);
-      color: white;
-      font-weight: 900;
-    }
-    .tag { color: var(--green-deep); background: var(--mint); border: 1px solid #cde8dc; border-radius: 999px; padding: 4px 9px; font-size: 12px; font-weight: 700; }
-    .card h3 { margin: 0 0 14px; font-size: 20px; line-height: 1.35; }
-    .skeleton, .mnemonic { border-radius: 8px; padding: 12px; margin: 10px 0; }
-    .skeleton { background: var(--mint); border: 1px solid #cde8dc; }
-    .mnemonic { background: var(--gold-soft); border: 1px solid #f0d8a8; }
-    .skeleton span, .mnemonic span { display: inline-block; font-size: 12px; font-weight: 800; color: var(--muted); margin-bottom: 4px; }
-    .skeleton p, .mnemonic p { margin: 0; font-weight: 650; }
-    details { margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 12px; }
-    summary { cursor: pointer; color: var(--green-deep); font-weight: 800; }
-    details ol { padding-left: 22px; margin: 12px 0 0; }
-    details li { margin-bottom: 7px; }
-    .done { display: flex; gap: 8px; align-items: center; margin-top: 14px; color: var(--muted); font-size: 14px; }
-    .done input { width: 18px; height: 18px; accent-color: var(--green); }
-    .empty { display: none; padding: 24px; text-align: center; color: var(--muted); background: #fff; border: 1px dashed var(--line); border-radius: 8px; }
-    .empty.show { display: block; }
-    .mobile-jump { display: none; }
-    @media (max-width: 920px) {
-      .hero { min-height: auto; padding: 34px 18px 22px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 22px; }
-      .hero-panel { padding: 16px; }
-      .layout { grid-template-columns: 1fr; width: min(100% - 24px, 720px); margin-top: 16px; }
-      .sidebar { position: static; }
-      .quick-box { display: none; }
-      .cards { grid-template-columns: 1fr; }
-      .method-grid { grid-template-columns: 1fr 1fr; }
-      .section-heading h2 { font-size: 23px; }
-      .mobile-jump { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
-      .mobile-jump a { flex: 0 0 auto; border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; background: #fff; font-size: 13px; color: var(--green-deep); font-weight: 700; }
-    }
-    @media (max-width: 560px) {
-      body { line-height: 1.58; }
-      h1 { font-size: 38px; }
-      .stats, .method-grid { grid-template-columns: 1fr; }
-      .action-row { grid-template-columns: 1fr; }
-      .card { padding: 15px; }
-      .card h3 { font-size: 18px; }
-      .section-heading { align-items: start; flex-direction: column; gap: 2px; }
-    }
-    @media print {
-      body { background: #fff; }
-      .sidebar, .hero-panel, .mobile-jump, .done, .action-row { display: none !important; }
-      .hero { min-height: auto; padding: 20px 0; }
-      .hero-inner, .layout { width: 100%; display: block; }
-      .cards { grid-template-columns: 1fr; }
-      .card { box-shadow: none; break-inside: avoid; }
-      details { page-break-inside: avoid; }
-      details:not([open]) ol { display: block; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产业博士航线手册 · MSCA-DN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --hull:#1F2D38; --kraft:#ECE6D8; --kraft-card:#F7F3E8;
+  --steel:#5B7C8D; --steel-deep:#3E5A68;
+  --rust:#A8472E; --rust-bg:#F1DDD2;
+  --clear:#4A7856; --clear-bg:#DEE8DE;
+  --line:#C9BFA5; --ink-soft:#5A6B72;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--kraft);color:var(--hull);font-family:'Source Serif 4',serif;}
+.disp{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.06em;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:var(--steel-deep);text-decoration:none;border-bottom:1px solid var(--line);}
+.layout{display:grid;grid-template-columns:220px 1fr;max-width:1180px;margin:0 auto;}
+/* Rail */
+.rail{position:sticky;top:0;height:100vh;padding:32px 0 32px 28px;border-right:1px solid var(--line);}
+.rail-tag{font-size:10px;color:var(--ink-soft);letter-spacing:0.12em;margin-bottom:18px;}
+.rail-nav a{display:block;font-size:13px;font-weight:500;color:var(--hull);border-bottom:none;padding:7px 0;opacity:0.65;}
+.rail-nav a:hover{opacity:1;color:var(--rust);}
+.rail-nav .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--steel);margin-right:8px;}
+/* Main */
+main{padding:36px 36px 100px 36px;min-width:0;}
+section{margin-bottom:64px;scroll-margin-top:24px;}
+.manifest-head{background:var(--kraft-card);border:1px solid var(--line);border-radius:4px;padding:28px 30px;margin-bottom:40px;}
+.manifest-head .eyebrow{font-size:11px;color:var(--rust);letter-spacing:0.14em;margin:0 0 10px;}
+.manifest-head h1{font-size:30px;margin:0 0 6px;font-weight:600;letter-spacing:0.02em;}
+.manifest-head .sub{font-size:14px;color:var(--ink-soft);font-family:'Source Serif 4';margin:0 0 20px;}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px dashed var(--line);padding-top:14px;}
+.meta-grid div{padding-right:10px;}
+.meta-grid .k{font-size:10px;color:var(--ink-soft);letter-spacing:0.08em;margin-bottom:3px;}
+.meta-grid .v{font-size:13px;font-weight:600;}
+h2.sec-title{font-size:13px;letter-spacing:0.1em;color:var(--rust);margin:0 0 4px;}
+h2.sec-title-main{font-size:22px;font-weight:600;margin:0 0 20px;letter-spacing:0.01em;}
+p{font-size:15.5px;line-height:1.75;}
+.stamp{display:inline-block;font-family:'JetBrains Mono';font-size:10px;letter-spacing:0.08em;color:var(--clear);border:1.5px solid var(--clear);border-radius:3px;padding:2px 7px;transform:rotate(-2deg);margin-left:6px;vertical-align:middle;}
+.note{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
+/* Mechanism table */
+.tbl{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;}
+.tbl th{font-family:'Oswald';font-size:11px;letter-spacing:0.06em;text-align:left;color:var(--ink-soft);border-bottom:1px solid var(--hull);padding:8px 10px;}
+.tbl td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+/* Route strip */
+.route{position:relative;padding:50px 10px 30px;margin:20px 0 30px;}
+.route-line{position:absolute;left:30px;right:30px;top:74px;height:2px;background:repeating-linear-gradient(to right,var(--steel) 0 8px,transparent 8px 14px);}
+.ports{display:flex;justify-content:space-between;position:relative;}
+.port{flex:1;text-align:center;position:relative;}
+.port .ring{width:18px;height:18px;border-radius:50%;border:2px solid var(--steel);background:var(--kraft-card);margin:0 auto 10px;position:relative;z-index:2;}
+.port.now .ring{background:var(--rust);border-color:var(--rust);box-shadow:0 0 0 4px var(--rust-bg);}
+.port .lbl{font-family:'Oswald';font-size:11.5px;font-weight:600;letter-spacing:0.02em;}
+.port .dt{font-family:'JetBrains Mono';font-size:10.5px;color:var(--ink-soft);margin-top:2px;}
+.port .you{position:absolute;top:-36px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono';font-size:9px;background:var(--rust);color:var(--kraft-card);padding:2px 6px;border-radius:3px;white-space:nowrap;}
+/* Cargo */
+.cargo-list{list-style:none;padding:0;margin:18px 0;}
+.cargo-list li{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line);}
+.cargo-list .tag{font-family:'JetBrains Mono';font-size:10.5px;color:var(--steel-deep);min-width:78px;padding-top:2px;}
+.cargo-list .body{font-size:14.5px;line-height:1.65;}
+/* Phase cards */
+.phase{background:var(--kraft-card);border:1px solid var(--line);border-radius:4px;margin-bottom:18px;overflow:hidden;}
+.phase-head{display:flex;justify-content:space-between;align-items:baseline;padding:16px 22px;border-bottom:1px solid var(--line);}
+.phase-head .name{font-family:'Oswald';font-size:15px;font-weight:600;letter-spacing:0.02em;}
+.phase-head .when{font-family:'JetBrains Mono';font-size:11.5px;color:var(--ink-soft);}
+.phase-body{padding:16px 22px 20px;}
+.action{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:14px;line-height:1.6;}
+.action input[type=checkbox]{margin-top:4px;width:15px;height:15px;accent-color:var(--clear);cursor:pointer;flex-shrink:0;}
+.action.checked .txt{text-decoration:line-through;color:var(--ink-soft);}
+/* Advisory */
+.advisory{border:1.5px solid var(--rust);background:var(--rust-bg);border-radius:4px;padding:20px 24px;margin:18px 0;}
+.advisory .h{font-family:'Oswald';font-size:12px;letter-spacing:0.08em;color:var(--rust);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.advisory .h::before{content:"";width:10px;height:10px;background:var(--rust);clip-path:polygon(50% 0%,0% 100%,100% 100%);display:inline-block;}
+.advisory p{font-size:14px;margin:0 0 10px;}
+.advisory p:last-child{margin-bottom:0;}
+.checkpoint{background:var(--steel-deep);color:#fff;border-radius:4px;padding:18px 22px;margin-top:20px;}
+.checkpoint .h{font-family:'JetBrains Mono';font-size:11px;letter-spacing:0.08em;color:#BFD3DB;margin-bottom:8px;}
+.checkpoint p{color:#EFEFE6;margin:0;font-size:14px;}
+.refs{font-size:11.5px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:10px;margin-top:18px;line-height:1.7;}
+/* Mobile */
+.mobile-rail{display:none;}
+@media (max-width:880px){
+  .layout{grid-template-columns:1fr;}
+  .rail{display:none;}
+  .mobile-rail{display:flex;overflow-x:auto;gap:6px;padding:10px 16px;background:var(--kraft-card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+  .mobile-rail a{font-family:'JetBrains Mono';font-size:11px;white-space:nowrap;border:1px solid var(--line);border-radius:99px;padding:5px 11px;color:var(--hull);border-bottom:1px solid var(--line);}
+  main{padding:24px 18px 80px;}
+  .meta-grid{grid-template-columns:repeat(2,1fr);row-gap:14px;}
+  .ports{flex-wrap:wrap;}
+  .port{flex:0 0 33%;margin-bottom:30px;}
+  .route-line{display:none;}
+}
+</style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <div>
-        <span class="eyebrow">公司知识竞赛 · 简答题 1-24</span>
-        <h1>把长答案背成关键词链</h1>
-        <p class="lead">这份资料按记忆负担重新分组：先看骨架，再用口诀抓顺序，最后展开得分答案核对。电脑端适合通读，手机端适合碎片时间刷卡。</p>
-      </div>
-      <aside class="hero-panel">
-        <h2>今日复习顺序</h2>
-        <div class="stats">
-          <div class="stat"><strong>24</strong><span>道简答题</span></div>
-          <div class="stat"><strong>5</strong><span>个主题组</span></div>
-          <div class="stat"><strong>3</strong><span>层记忆法</span></div>
-        </div>
-      </aside>
+
+<div class="mobile-rail">
+  <a href="#overview">总览</a><a href="#mechanism">机制</a><a href="#timeline">航线</a><a href="#cargo">货物</a><a href="#phases">航段</a><a href="#risk">风险</a>
+</div>
+
+<div class="layout">
+  <nav class="rail">
+    <div class="rail-tag mono">ROUTING MANIFEST</div>
+    <div class="rail-nav">
+      <a href="#overview"><span class="dot"></span>总览</a>
+      <a href="#mechanism"><span class="dot"></span>机制澄清</a>
+      <a href="#timeline"><span class="dot"></span>航线时间表</a>
+      <a href="#cargo"><span class="dot"></span>你的货物</a>
+      <a href="#phases"><span class="dot"></span>五个航段</a>
+      <a href="#risk"><span class="dot"></span>风险与补给</a>
     </div>
-  </header>
+  </nav>
 
-  <main class="layout">
-    <aside class="sidebar">
-      <div class="toolbox">
-        <h2>复习工具</h2>
-        <input id="search" class="search" type="search" placeholder="搜索：如 2359、事故、三同时">
-        <div class="chips">
-          <button class="chip active" data-filter="all">全部</button>
-          <button class="chip" data-filter="企业文化与发展思路">企业文化与发展思路</button><button class="chip" data-filter="安全职责与管理机制">安全职责与管理机制</button><button class="chip" data-filter="网格化与现场管理">网格化与现场管理</button><button class="chip" data-filter="事故隐患与应急报告">事故隐患与应急报告</button><button class="chip" data-filter="基础安全知识">基础安全知识</button>
+  <main>
+    <section id="overview">
+      <div class="manifest-head">
+        <p class="eyebrow mono">MANIFEST NO. MSCA-DN-2026 · INDUSTRIAL DOCTORATE ROUTE</p>
+        <h1>产业博士航线手册</h1>
+        <p class="sub">MSCA Doctoral Networks 申请方针 · 瑞典优先 · 整理至2026年6月</p>
+        <div class="meta-grid mono">
+          <div><div class="k">始发港</div><div class="v">上海 · ZPMC</div></div>
+          <div><div class="k">目的港</div><div class="v">瑞典(优先)</div></div>
+          <div><div class="k">主要货物</div><div class="v">产业经验</div></div>
+          <div><div class="k">当前航段</div><div class="v">第一段 · 备航</div></div>
         </div>
-        <div class="action-row">
-          <button id="openAll">展开答案</button>
-          <button id="closeAll" class="secondary">收起答案</button>
-        </div>
-        <div class="progress"><span id="progressText">已掌握 0 / 24</span><div class="bar"><span id="progressBar"></span></div></div>
       </div>
-      <div class="quick-box">
-        <h2>一页骨架</h2>
-        <div class="quick-list"><a class="quick-pill" href="#card-1"><span>01</span>1个愿景；2个基础；3大主业；4化发展；5大核心理念；中交“六六六”战略/“六零”目标。</a><a class="quick-pill" href="#card-2"><span>02</span>愿景、使命、价值观、精神、作风。</a><a class="quick-pill" href="#card-3"><span>03</span>管理、创新、服务、质量、国际化。</a><a class="quick-pill" href="#card-4"><span>04</span>责任制；制度规程；教育培训；投入；双重预防；应急预案；事故报告。</a><a class="quick-pill" href="#card-5"><span>05</span>拟制度；教培记录；危险源；演练；检查隐患建议；制止三违；督促整改。</a><a class="quick-pill" href="#card-6"><span>06</span>班前会；作业要点卡、风险提示卡、应急明白卡。</a><a class="quick-pill" href="#card-7"><span>07</span>认识、风险、制度、措施、培训、资源、组织能力、监督、奖惩、应急、经验、安全文化。</a><a class="quick-pill" href="#card-8"><span>08</span>2风险；3知道；5步曲；9到位。</a><a class="quick-pill" href="#card-9"><span>09</span>行业、业务、生产经营都必须管安全。</a><a class="quick-pill" href="#card-10"><span>10</span>风险分级管控 + 隐患排查治理。</a><a class="quick-pill" href="#card-11"><span>11</span>管到每个工点、每台设备、每个人。</a><a class="quick-pill" href="#card-12"><span>12</span>一次专题民主生活会；一次安委会；一次调研；一次督查；一次安全课。</a><a class="quick-pill" href="#card-13"><span>13</span>严：体系、三违、分包；准：风险、隐患、应急；实：现场、创新、人员、培训、文化。</a><a class="quick-pill" href="#card-14"><span>14</span>严、细、全、上、心、思、总、调、讲、宣。</a><a class="quick-pill" href="#card-15"><span>15</span>严监管；防风险和三违；死角排隐患；守岗位。</a><a class="quick-pill" href="#card-16"><span>16</span>同第8题：两风险、三知道、五部曲、九到位。</a><a class="quick-pill" href="#card-17"><span>17</span>四不：通知、招呼、汇报、陪同接待；两直：奔基层、插现场。</a><a class="quick-pill" href="#card-18"><span>18</span>目标任务；方法措施；经费物资；机构人员；时限要求；安全措施和应急预案。</a><a class="quick-pill" href="#card-19"><span>19</span>电、焊、高、冷；煤、矿、油、冶；危化、烟爆。</a><a class="quick-pill" href="#card-20"><span>20</span>单位概况；时间地点现场；简要经过；伤亡/损失；措施；其他。</a><a class="quick-pill" href="#card-21"><span>21</span>单位概况；经过和救援；伤亡损失；原因性质；责任处理建议；防范整改。</a><a class="quick-pill" href="#card-22"><span>22</span>原因、责任者、职工教育、防护措施。</a><a class="quick-pill" href="#card-23"><span>23</span>安全设施与主体工程同时设计、同时施工、同时投入生产和使用。</a><a class="quick-pill" href="#card-24"><span>24</span>呼吸道、皮肤、消化道。</a></div>
-      </div>
-    </aside>
+      <p>这份手册把"该读博吗""怎么读""读哪里"这些分散的讨论，收拢成一条可执行的航线。核心论点：<b>ZPMC的产业经验是这条航线上的合法货物，不是需要藏起来的短板</b>——前提是你要用对的方式把它装船。</p>
+    </section>
 
-    <section class="content">
-      <nav class="mobile-jump"><a href="#card-1">01</a><a href="#card-2">02</a><a href="#card-3">03</a><a href="#card-4">04</a><a href="#card-5">05</a><a href="#card-6">06</a><a href="#card-7">07</a><a href="#card-8">08</a><a href="#card-9">09</a><a href="#card-10">10</a><a href="#card-11">11</a><a href="#card-12">12</a><a href="#card-13">13</a><a href="#card-14">14</a><a href="#card-15">15</a><a href="#card-16">16</a><a href="#card-17">17</a><a href="#card-18">18</a><a href="#card-19">19</a><a href="#card-20">20</a><a href="#card-21">21</a><a href="#card-22">22</a><a href="#card-23">23</a><a href="#card-24">24</a></nav>
-      <div class="memorize-strip">
-        <h2>三步背法</h2>
-        <div class="method-grid">
-          <div class="method"><strong>1. 先背数字结构</strong><span>123456、2359、十二到位先拿下。</span></div>
-          <div class="method"><strong>2. 再背动词顺序</strong><span>建立、组织、保证、检查、报告。</span></div>
-          <div class="method"><strong>3. 最后补关键词</strong><span>每条只抓能得分的核心词。</span></div>
-          <div class="method"><strong>4. 遮答案复述</strong><span>说不出再看口诀，不要一开始硬读全文。</span></div>
+    <section id="mechanism">
+      <p class="sec-title mono">SECTION 01</p>
+      <h2 class="sec-title-main">先纠正一个关键的机制性认知</h2>
+      <p>MSCA博士的"申请"分两个完全不同的层级，必须分清楚，否则会用错力气。</p>
+      <table class="tbl">
+        <tr><th>层级</th><th>谁来做</th><th>你的角色</th></tr>
+        <tr><td><b>立项层面</b></td><td>大学/研究机构组成联合体，向欧盟申请项目经费，写一份完整的科研提案</td><td>不参与——这是教授和科研管理部门的工作</td></tr>
+        <tr><td><b>招募层面</b></td><td>立项成功后，联合体按已写好的研究课题，在EURAXESS等平台招募具体博士生</td><td>这才是你要投的"职位"<span class="stamp">YOUR PORT OF CALL</span></td></tr>
+      </table>
+      <p class="note">换句话说：你不是在"申请MSCA"，你是在申请某个已经立项成功的项目里的具体博士岗位。课题、导师、地点在招聘启事出现时已经定好，你只能选"投哪个"。</p>
+    </section>
+
+    <section id="timeline">
+      <p class="sec-title mono">SECTION 02</p>
+      <h2 class="sec-title-main">官方航线时间表</h2>
+      <p>灰色的两段是院校在走流程，跟你无关；钢蓝色的三段才是你真正要主动出手的地方。</p>
+      <div class="route">
+        <div class="route-line"></div>
+        <div class="ports">
+          <div class="port now"><span class="you mono">YOU ARE HERE</span><div class="ring"></div><div class="lbl">蹲守备航</div><div class="dt mono">现在–11月</div></div>
+          <div class="port"><div class="ring"></div><div class="lbl">立项截止</div><div class="dt mono">2026-11-24</div></div>
+          <div class="port"><div class="ring"></div><div class="lbl">岗位放出</div><div class="dt mono">2027年4-5月</div></div>
+          <div class="port"><div class="ring" style="border-color:var(--rust);background:var(--rust-bg)"></div><div class="lbl">主投递窗口</div><div class="dt mono">2027中–2028</div></div>
+          <div class="port"><div class="ring" style="border-color:var(--clear);background:var(--clear-bg)"></div><div class="lbl">录用入职</div><div class="dt mono">签约办居留</div></div>
         </div>
       </div>
-      <div id="empty" class="empty">没有匹配内容，换个关键词试试。</div>
-      
-    <section class="study-section" data-section="企业文化与发展思路">
-      <div class="section-heading">
-        <p>Part 1</p>
-        <h2>企业文化与发展思路</h2>
-        <span>3 题</span>
+      <p>2026轮立项申请<b>2026年5月28日开放</b>，<b>11月24日17:00 CET截止</b>——这是院校的截止日，不是你的。评审结果<b>2027年4月</b>公布，资助协议<b>7月</b>签署。对个人申请者，新立项项目的博士岗位预计<b>2027年4-5月起</b>密集出现在EURAXESS，并持续整个项目周期(通常4-5年)。</p>
+      <p class="refs">来源：marie-sklodowska-curie-actions.ec.europa.eu「MSCA Doctoral Networks 2026」；phdme.com「MSCA Doctoral Networks 2026: The Ultimate Guide for North American Applicants」，2026年1月</p>
+    </section>
+
+    <section id="cargo">
+      <p class="sec-title mono">SECTION 03</p>
+      <h2 class="sec-title-main">你的货物：ZPMC经验怎么装船</h2>
+      <p>Industrial Doctorate的设计初衷就是弥合"推进知识"(学术)与"转化知识"(产业)之间的鸿沟——评审明确希望产业伙伴真正承担落地应用的角色，不是摆设。这意味着，如果你能让课题组确信你懂真实的港机/航运场景，你的价值是真实的。</p>
+      <ul class="cargo-list">
+        <li><span class="tag mono">货物01</span><div class="body"><b>具体化产业痛点</b>——不要泛泛说"我懂港口"，要能讲清楚一两个具体场景：投标中的设备数据孤岛、跨境物流合同的低效环节、核心部件采购的决策痛点</div></li>
+        <li><span class="tag mono">货物02</span><div class="body"><b>一份6-8页英文mini-report</b>——把这些观察整理成有研究问题意识的文档，结构：问题是什么 → 现有方式为何不够 → 可能的研究切入角度 → 你的角色定位</div></li>
+        <li><span class="tag mono">货物03</span><div class="body"><b>量化你的工作</b>——投标金额规模、参与项目数量、接触的客户/供应商类型，数字比"市场营销岗"这个职位名称更有说服力</div></li>
+      </ul>
+      <p class="refs">来源：eaie.org「MSCA Doctoral Networks: 3 routes to structured collaboration」；microfluidics-innovation-center.com「How to write a successful HE MSCA doctoral network proposal」</p>
+    </section>
+
+    <section id="phases">
+      <p class="sec-title mono">SECTION 04</p>
+      <h2 class="sec-title-main">五个航段：分阶段行动清单</h2>
+
+      <div class="phase">
+        <div class="phase-head"><span class="name">航段一 · 打基础</span><span class="when mono">现在 — 2026年9月</span></div>
+        <div class="phase-body">
+          <label class="action" data-id="p1-1"><input type="checkbox">注册EURAXESS账户，开启职位邮件订阅(关键词：industrial doctorate supply chain / digital twin port / smart logistics PhD / maritime decarbonisation doctoral / operations research industrial doctorate)</label>
+          <label class="action" data-id="p1-2"><input type="checkbox">完成mini-report初稿——这是后续主动联系的敲门材料</label>
+          <label class="action" data-id="p1-3"><input type="checkbox">列目标课题组清单：瑞典(查尔姆斯运输与海事系、隆德大学工业管理系)、荷兰(鹿特丹RSM、埃因霍温TU/e工业工程系)；用CORDIS数据库按关键词反查正在执行Horizon Europe项目的教授</label>
+          <label class="action" data-id="p1-4"><input type="checkbox">整理2页英文学术CV，突出USYD研究方法训练+ZPMC产业接触面+语言能力</label>
+        </div>
       </div>
-      <div class="cards">
-        <article class="card" id="card-1" data-category="企业文化与发展思路" data-text="上海振华重工集团“123456”发展思路？ 1个愿景；2个基础；3大主业；4化发展；5大核心理念；中交“六六六”战略/“六零”目标。 口诀：一愿二基三主业，四化五念六能力；六零目标收尾。 1. 一个愿景：围绕产品卓越、品牌卓著、创新领先、治理现代，建设具有全球竞争力的世界一流装备制造企业。 2. 两个基础：科技是第一生产力、人才是第一资源、创新是第一动力，实施人才强企、科技强企。 3. 三大主业：港口机械、海工装备、钢结构。以客户为中心，以港为基、以钢为纲，提升智慧港口核心竞争力。 4. 四化发展：高端化、智能化、绿色化、国际化。 5. 五大核心理念：创新、绿色、数智、融合、可持续；强化统筹、创新、精益、高效、共享管理。 6. 落实中交集团“六六六”战略部署，提升市场开发、科研设计、供应链管理、智能制造、船舶运输、客户服务一体化服务能力；实现安全零事故、质量零缺陷、环保零排放、进度零滞后、成本零浪费、客户零投诉。">
-          <div class="card-top">
-            <span class="num">01</span>
-            <span class="tag">企业文化与发展思路</span>
-          </div>
-          <h3>上海振华重工集团“123456”发展思路？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>1个愿景；2个基础；3大主业；4化发展；5大核心理念；中交“六六六”战略/“六零”目标。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：一愿二基三主业，四化五念六能力；六零目标收尾。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>一个愿景：围绕产品卓越、品牌卓著、创新领先、治理现代，建设具有全球竞争力的世界一流装备制造企业。</li><li>两个基础：科技是第一生产力、人才是第一资源、创新是第一动力，实施人才强企、科技强企。</li><li>三大主业：港口机械、海工装备、钢结构。以客户为中心，以港为基、以钢为纲，提升智慧港口核心竞争力。</li><li>四化发展：高端化、智能化、绿色化、国际化。</li><li>五大核心理念：创新、绿色、数智、融合、可持续；强化统筹、创新、精益、高效、共享管理。</li><li>落实中交集团“六六六”战略部署，提升市场开发、科研设计、供应链管理、智能制造、船舶运输、客户服务一体化服务能力；实现安全零事故、质量零缺陷、环保零排放、进度零滞后、成本零浪费、客户零投诉。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="1"> 已能复述</label>
-        </article>
-        <article class="card" id="card-2" data-category="企业文化与发展思路" data-text="上海振华重工集团企业文化核心理念？ 愿景、使命、价值观、精神、作风。 口诀：愿使价精风。 企业愿景：建设具有全球竞争力的世界一流装备制造企业。 企业使命：为世界制造美好。 企业核心价值观：崇德崇学，向善向上。 企业精神：敢为人先，引领世界。 企业工作作风：团结奋斗，苦干实干。">
-          <div class="card-top">
-            <span class="num">02</span>
-            <span class="tag">企业文化与发展思路</span>
-          </div>
-          <h3>上海振华重工集团企业文化核心理念？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>愿景、使命、价值观、精神、作风。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：愿使价精风。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>企业愿景：建设具有全球竞争力的世界一流装备制造企业。</li><li>企业使命：为世界制造美好。</li><li>企业核心价值观：崇德崇学，向善向上。</li><li>企业精神：敢为人先，引领世界。</li><li>企业工作作风：团结奋斗，苦干实干。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="2"> 已能复述</label>
-        </article>
-        <article class="card" id="card-3" data-category="企业文化与发展思路" data-text="上海振华重工集团企业文化应用理念？ 管理、创新、服务、质量、国际化。 口诀：管创服质国。 管理理念：统筹、创新、精益、高效、共享。 创新理念：每年创造一个世界第一。 服务理念：以客户为中心、满足客户需求、为客户创造价值。 质量理念：追求零缺陷。 国际化理念：绿色智造，美好世界。">
-          <div class="card-top">
-            <span class="num">03</span>
-            <span class="tag">企业文化与发展思路</span>
-          </div>
-          <h3>上海振华重工集团企业文化应用理念？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>管理、创新、服务、质量、国际化。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：管创服质国。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>管理理念：统筹、创新、精益、高效、共享。</li><li>创新理念：每年创造一个世界第一。</li><li>服务理念：以客户为中心、满足客户需求、为客户创造价值。</li><li>质量理念：追求零缺陷。</li><li>国际化理念：绿色智造，美好世界。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="3"> 已能复述</label>
-        </article></div>
-    </section>
-    <section class="study-section" data-section="安全职责与管理机制">
-      <div class="section-heading">
-        <p>Part 2</p>
-        <h2>安全职责与管理机制</h2>
-        <span>10 题</span>
+
+      <div class="phase">
+        <div class="phase-head"><span class="name">航段二 · 主动出击 + 老项目蹲守</span><span class="when mono">2026年9月 — 12月</span></div>
+        <div class="phase-body">
+          <label class="action" data-id="p2-1"><input type="checkbox">给目标课题组教授发邮件：自我介绍 → 对其论文/项目的具体理解 → mini-report附件 → 询问2026轮筹备情况或老项目空缺</label>
+          <label class="action" data-id="p2-2"><input type="checkbox">继续蹲守2024/2025老项目的滚动空缺</label>
+          <label class="action" data-id="p2-3"><input type="checkbox">提前联系推荐人：USYD老师 + ZPMC上级，告知2026年底/2027年可能需要推荐信</label>
+        </div>
       </div>
-      <div class="cards">
-        <article class="card" id="card-4" data-category="安全职责与管理机制" data-text="主要负责人对本单位安全生产工作的具体职责有哪些？ 责任制；制度规程；教育培训；投入；双重预防；应急预案；事故报告。 口诀：责制教投双，应报。 1. 建立健全并落实全员安全生产责任制，加强安全生产标准化建设。 2. 组织制定并实施安全生产规章制度和操作规程。 3. 组织制定并实施安全生产教育和培训计划。 4. 保证安全生产投入有效实施。 5. 组织建立并落实安全风险分级管控和隐患排查治理双重预防工作机制，督促检查安全生产工作，及时消除事故隐患。 6. 组织制定并实施生产安全事故应急救援预案。 7. 及时、如实报告生产安全事故。">
-          <div class="card-top">
-            <span class="num">04</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>主要负责人对本单位安全生产工作的具体职责有哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>责任制；制度规程；教育培训；投入；双重预防；应急预案；事故报告。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：责制教投双，应报。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>建立健全并落实全员安全生产责任制，加强安全生产标准化建设。</li><li>组织制定并实施安全生产规章制度和操作规程。</li><li>组织制定并实施安全生产教育和培训计划。</li><li>保证安全生产投入有效实施。</li><li>组织建立并落实安全风险分级管控和隐患排查治理双重预防工作机制，督促检查安全生产工作，及时消除事故隐患。</li><li>组织制定并实施生产安全事故应急救援预案。</li><li>及时、如实报告生产安全事故。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="4"> 已能复述</label>
-        </article>
-        <article class="card" id="card-5" data-category="安全职责与管理机制" data-text="安全生产管理机构及安全生产管理人员有哪些职责？ 拟制度；教培记录；危险源；演练；检查隐患建议；制止三违；督促整改。 口诀：拟教危演查，止违促改。 1. 组织或参与拟订安全生产规章制度、操作规程和生产安全事故应急救援预案。 2. 组织或参与安全生产教育和培训，如实记录情况。 3. 组织开展危险源辨识和评估，督促落实重大危险源安全管理措施。 4. 组织或参与应急救援演练。 5. 检查安全生产状况，及时排查事故隐患，提出改进建议。 6. 制止和纠正违章指挥、强令冒险作业、违反操作规程行为。 7. 督促落实安全生产整改措施。">
-          <div class="card-top">
-            <span class="num">05</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>安全生产管理机构及安全生产管理人员有哪些职责？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>拟制度；教培记录；危险源；演练；检查隐患建议；制止三违；督促整改。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：拟教危演查，止违促改。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>组织或参与拟订安全生产规章制度、操作规程和生产安全事故应急救援预案。</li><li>组织或参与安全生产教育和培训，如实记录情况。</li><li>组织开展危险源辨识和评估，督促落实重大危险源安全管理措施。</li><li>组织或参与应急救援演练。</li><li>检查安全生产状况，及时排查事故隐患，提出改进建议。</li><li>制止和纠正违章指挥、强令冒险作业、违反操作规程行为。</li><li>督促落实安全生产整改措施。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="5"> 已能复述</label>
-        </article>
-        <article class="card" id="card-6" data-category="安全职责与管理机制" data-text="“一会三卡”指哪些内容？ 班前会；作业要点卡、风险提示卡、应急明白卡。 口诀：班前一会，要点风险应急三卡。 一会：班前会。 三卡：作业要点卡、风险提示卡、应急明白卡。">
-          <div class="card-top">
-            <span class="num">06</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>“一会三卡”指哪些内容？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>班前会；作业要点卡、风险提示卡、应急明白卡。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：班前一会，要点风险应急三卡。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>一会：班前会。</li><li>三卡：作业要点卡、风险提示卡、应急明白卡。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="6"> 已能复述</label>
-        </article>
-        <article class="card" id="card-7" data-category="安全职责与管理机制" data-text="中交集团提出的“十二到位”包括哪些内容？ 认识、风险、制度、措施、培训、资源、组织能力、监督、奖惩、应急、经验、安全文化。 口诀：认风制措训，资组监奖急，经验文化。 安全认识到位；风险识别与管控到位；制度体系建设到位；安全措施落实到位；有效刚性培训到位；资源配置到位；安全管理组织与能力到位；动态监督检查到位；奖惩机制落实到位；应急管理与应急处置到位；经验教训的总结、吸取、分享到位；安全文化建设到位。">
-          <div class="card-top">
-            <span class="num">07</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>中交集团提出的“十二到位”包括哪些内容？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>认识、风险、制度、措施、培训、资源、组织能力、监督、奖惩、应急、经验、安全文化。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：认风制措训，资组监奖急，经验文化。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>安全认识到位；风险识别与管控到位；制度体系建设到位；安全措施落实到位；有效刚性培训到位；资源配置到位；安全管理组织与能力到位；动态监督检查到位；奖惩机制落实到位；应急管理与应急处置到位；经验教训的总结、吸取、分享到位；安全文化建设到位。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="7"> 已能复述</label>
-        </article>
-        <article class="card" id="card-9" data-category="安全职责与管理机制" data-text="“三管三必须”原则？ 行业、业务、生产经营都必须管安全。 口诀：行业、业务、生产经营，三个都管安全。 管行业必须管安全；管业务必须管安全；管生产经营必须管安全。">
-          <div class="card-top">
-            <span class="num">09</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>“三管三必须”原则？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>行业、业务、生产经营都必须管安全。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：行业、业务、生产经营，三个都管安全。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>管行业必须管安全；管业务必须管安全；管生产经营必须管安全。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="9"> 已能复述</label>
-        </article>
-        <article class="card" id="card-10" data-category="安全职责与管理机制" data-text="“双控”机制是什么？ 风险分级管控 + 隐患排查治理。 口诀：控风险，治隐患。 风险分级管控、隐患排查治理双重预防性工作机制。">
-          <div class="card-top">
-            <span class="num">10</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>“双控”机制是什么？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>风险分级管控 + 隐患排查治理。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：控风险，治隐患。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>风险分级管控、隐患排查治理双重预防性工作机制。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="10"> 已能复述</label>
-        </article>
-        <article class="card" id="card-12" data-category="安全职责与管理机制" data-text="“五个一”安全履职要求包括哪些？ 一次专题民主生活会；一次安委会；一次调研；一次督查；一次安全课。 口诀：两列席，一调研，一督查，一安全课。 列席一次包保单位的安全生产专题民主生活会；列席一次包保单位的安委会；开展一次“一岗双责”安全调研活动；带头开展一次对包保单位领导干部安全履职情况督查；带头讲一次安全课。">
-          <div class="card-top">
-            <span class="num">12</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>“五个一”安全履职要求包括哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>一次专题民主生活会；一次安委会；一次调研；一次督查；一次安全课。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：两列席，一调研，一督查，一安全课。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>列席一次包保单位的安全生产专题民主生活会；列席一次包保单位的安委会；开展一次“一岗双责”安全调研活动；带头开展一次对包保单位领导干部安全履职情况督查；带头讲一次安全课。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="12"> 已能复述</label>
-        </article>
-        <article class="card" id="card-13" data-category="安全职责与管理机制" data-text="“严、准、实”安全管理举措包括哪些？ 严：体系、三违、分包；准：风险、隐患、应急；实：现场、创新、人员、培训、文化。 口诀：严管体系三违分包；准防风险隐患应急；实抓现场创新人训文。 严：严格完善安全管理体系，严厉打击“三违”行为，严选分包队伍。 准：精准防范重大风险，精准排查事故隐患，精准开展应急处突。 实：抓实现场管理、创新管理、人员配备、教育培训、文化建设。">
-          <div class="card-top">
-            <span class="num">13</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>“严、准、实”安全管理举措包括哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>严：体系、三违、分包；准：风险、隐患、应急；实：现场、创新、人员、培训、文化。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：严管体系三违分包；准防风险隐患应急；实抓现场创新人训文。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>严：严格完善安全管理体系，严厉打击“三违”行为，严选分包队伍。</li><li>准：精准防范重大风险，精准排查事故隐患，精准开展应急处突。</li><li>实：抓实现场管理、创新管理、人员配备、教育培训、文化建设。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="13"> 已能复述</label>
-        </article>
-        <article class="card" id="card-14" data-category="安全职责与管理机制" data-text="安全管理“十字方针”包括哪些？ 严、细、全、上、心、思、总、调、讲、宣。 口诀直接背十字：严细全上心，思总调讲宣。 严：严格。 细：心细。 全：全面周到。 上：离不开上层领导支持与重视。 心：用心开展。 思：常思考、多思考、善思考，寻找方法。 总：常总结、多总结。 调：根据实际调整方法与技巧，具备自我调节能力。 讲：随时、随事、随地、随人讲安全。 宣：善于宣传，结合实际策划宣传内容与方式。">
-          <div class="card-top">
-            <span class="num">14</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>安全管理“十字方针”包括哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>严、细、全、上、心、思、总、调、讲、宣。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀直接背十字：严细全上心，思总调讲宣。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>严：严格。</li><li>细：心细。</li><li>全：全面周到。</li><li>上：离不开上层领导支持与重视。</li><li>心：用心开展。</li><li>思：常思考、多思考、善思考，寻找方法。</li><li>总：常总结、多总结。</li><li>调：根据实际调整方法与技巧，具备自我调节能力。</li><li>讲：随时、随事、随地、随人讲安全。</li><li>宣：善于宣传，结合实际策划宣传内容与方式。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="14"> 已能复述</label>
-        </article>
-        <article class="card" id="card-15" data-category="安全职责与管理机制" data-text="“严防死守”安全工作要求包括哪些？ 严监管；防风险和三违；死角排隐患；守岗位。 口诀：严监管，防风险，查死角，守岗位。 严：全面从严安全监管。 防：全面防范安全风险和“三违”行为。 死：全覆盖排查事故隐患不留死角。 守：坚持坚守岗位。">
-          <div class="card-top">
-            <span class="num">15</span>
-            <span class="tag">安全职责与管理机制</span>
-          </div>
-          <h3>“严防死守”安全工作要求包括哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>严监管；防风险和三违；死角排隐患；守岗位。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：严监管，防风险，查死角，守岗位。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>严：全面从严安全监管。</li><li>防：全面防范安全风险和“三违”行为。</li><li>死：全覆盖排查事故隐患不留死角。</li><li>守：坚持坚守岗位。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="15"> 已能复述</label>
-        </article></div>
-    </section>
-    <section class="study-section" data-section="网格化与现场管理">
-      <div class="section-heading">
-        <p>Part 3</p>
-        <h2>网格化与现场管理</h2>
-        <span>4 题</span>
+
+      <div class="phase">
+        <div class="phase-head"><span class="name">航段三 · 等待期，但不能闲着</span><span class="when mono">2027年1月 — 4月</span></div>
+        <div class="phase-body">
+          <label class="action" data-id="p3-1"><input type="checkbox">打磨mini-report至更完整版本，必要时投到会议/working paper平台增加可信度凭证</label>
+          <label class="action" data-id="p3-2"><input type="checkbox">持续跟进已联系教授，维持关系不要断联</label>
+          <label class="action" data-id="p3-3"><input type="checkbox">每半年复核一次瑞典语言/移民政策官方信息</label>
+        </div>
       </div>
-      <div class="cards">
-        <article class="card" id="card-8" data-category="网格化与现场管理" data-text="安全生产网格化“2359”要求中的2、3、5、9分别指什么？ 2风险；3知道；5步曲；9到位。 口诀：两风险三知道，五步九到位。 2风险：静态环境风险；动态环境风险。 3知道：知道岗位风险；知道伤害后果；知道防范及应急措施。 5步曲：施工方案审批及交底；作业区域风险识别；按施工方案实施；作业令及时审批及过程监护；事后总结提升。 9到位：网格及管理人员配置到位；双重预防机制管控到位；工装设备设施管控到位；通用及专用工艺管理到位；安全风险交底到位；工作令分级管控到位；人员针对性培训到位；检查监管到位；奖惩考核配套机制到位。">
-          <div class="card-top">
-            <span class="num">08</span>
-            <span class="tag">网格化与现场管理</span>
-          </div>
-          <h3>安全生产网格化“2359”要求中的2、3、5、9分别指什么？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>2风险；3知道；5步曲；9到位。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：两风险三知道，五步九到位。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>2风险：静态环境风险；动态环境风险。</li><li>3知道：知道岗位风险；知道伤害后果；知道防范及应急措施。</li><li>5步曲：施工方案审批及交底；作业区域风险识别；按施工方案实施；作业令及时审批及过程监护；事后总结提升。</li><li>9到位：网格及管理人员配置到位；双重预防机制管控到位；工装设备设施管控到位；通用及专用工艺管理到位；安全风险交底到位；工作令分级管控到位；人员针对性培训到位；检查监管到位；奖惩考核配套机制到位。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="8"> 已能复述</label>
-        </article>
-        <article class="card" id="card-11" data-category="网格化与现场管理" data-text="“三个管到”包括哪些？ 管到每个工点、每台设备、每个人。 口诀：点、设备、人。 管到每个工点：安全管理不留盲区，要求逐级落实到项目、车间、工位。 管到每台设备：淘汰和限制老旧设备，实施设备一体化管理，推进更新换代和本质安全。 管到每个人：提升基层员工安全意识和技术，开展教育培训，培养一线人才，推进分包商员工本工化管理。">
-          <div class="card-top">
-            <span class="num">11</span>
-            <span class="tag">网格化与现场管理</span>
-          </div>
-          <h3>“三个管到”包括哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>管到每个工点、每台设备、每个人。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：点、设备、人。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>管到每个工点：安全管理不留盲区，要求逐级落实到项目、车间、工位。</li><li>管到每台设备：淘汰和限制老旧设备，实施设备一体化管理，推进更新换代和本质安全。</li><li>管到每个人：提升基层员工安全意识和技术，开展教育培训，培养一线人才，推进分包商员工本工化管理。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="11"> 已能复述</label>
-        </article>
-        <article class="card" id="card-16" data-category="网格化与现场管理" data-text="网格化“2359”管理要求包括哪些？ 同第8题：两风险、三知道、五部曲、九到位。 这题和第8题高度重复，可合并背：2风险、3知道、5流程、9落实。 2是两风险：静态环境风险；动态环境风险。 3是三知道：知道岗位风险、伤害后果、防范及应急措施。 5是五部曲：施工方案审批及交底；作业区域风险识别；按方案实施；作业令审批及过程监护；事后总结提升。 9是九个到位：网格及管理人员配置到位；双控预防机制管控到位；工装设备设施管控到位；通用及专用工艺管理到位；安全风险交底到位；工作令分级管控到位；人员针对性培训到位；检查监管到位；配套机制到位。">
-          <div class="card-top">
-            <span class="num">16</span>
-            <span class="tag">网格化与现场管理</span>
-          </div>
-          <h3>网格化“2359”管理要求包括哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>同第8题：两风险、三知道、五部曲、九到位。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>这题和第8题高度重复，可合并背：2风险、3知道、5流程、9落实。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>2是两风险：静态环境风险；动态环境风险。</li><li>3是三知道：知道岗位风险、伤害后果、防范及应急措施。</li><li>5是五部曲：施工方案审批及交底；作业区域风险识别；按方案实施；作业令审批及过程监护；事后总结提升。</li><li>9是九个到位：网格及管理人员配置到位；双控预防机制管控到位；工装设备设施管控到位；通用及专用工艺管理到位；安全风险交底到位；工作令分级管控到位；人员针对性培训到位；检查监管到位；配套机制到位。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="16"> 已能复述</label>
-        </article>
-        <article class="card" id="card-17" data-category="网格化与现场管理" data-text="“四不两直”指哪些内容？ 四不：通知、招呼、汇报、陪同接待；两直：奔基层、插现场。 口诀：不通知不招呼，不汇报不陪同；直基层直现场。 不发通知、不打招呼、不听汇报、不用陪同和接待；直奔基层、直插现场。">
-          <div class="card-top">
-            <span class="num">17</span>
-            <span class="tag">网格化与现场管理</span>
-          </div>
-          <h3>“四不两直”指哪些内容？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>四不：通知、招呼、汇报、陪同接待；两直：奔基层、插现场。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：不通知不招呼，不汇报不陪同；直基层直现场。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>不发通知、不打招呼、不听汇报、不用陪同和接待；直奔基层、直插现场。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="17"> 已能复述</label>
-        </article></div>
-    </section>
-    <section class="study-section" data-section="事故隐患与应急报告">
-      <div class="section-heading">
-        <p>Part 4</p>
-        <h2>事故隐患与应急报告</h2>
-        <span>5 题</span>
+
+      <div class="phase">
+        <div class="phase-head"><span class="name">航段四 · 主战场</span><span class="when mono">2027年4月 — 2028年</span></div>
+        <div class="phase-body">
+          <label class="action" data-id="p4-1"><input type="checkbox">新立项项目岗位密集放出，优先投已联系过的课题组(转化率最高)，同时通过EURAXESS广撒网</label>
+          <label class="action" data-id="p4-2"><input type="checkbox">准备标准申请包：求职信 + 2-3页研究计划书 + 学术与工作经历CV + 写作样本(mini-report)</label>
+          <label class="action" data-id="p4-3"><input type="checkbox">面试重点准备"为什么是你"——讲具体的ZPMC产业痛点观察，不讲泛泛的"对欧洲生活感兴趣"</label>
+        </div>
       </div>
-      <div class="cards">
-        <article class="card" id="card-18" data-category="事故隐患与应急报告" data-text="重大事故隐患治理方案包括哪些内容？ 目标任务；方法措施；经费物资；机构人员；时限要求；安全措施和应急预案。 口诀：目标、方法、钱物、人、时间、安全应急。 治理的目标和任务；采取的方法和措施；经费和物资的落实；负责治理的机构和人员；治理的时限和要求；安全措施和应急预案。">
-          <div class="card-top">
-            <span class="num">18</span>
-            <span class="tag">事故隐患与应急报告</span>
-          </div>
-          <h3>重大事故隐患治理方案包括哪些内容？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>目标任务；方法措施；经费物资；机构人员；时限要求；安全措施和应急预案。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：目标、方法、钱物、人、时间、安全应急。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>治理的目标和任务；采取的方法和措施；经费和物资的落实；负责治理的机构和人员；治理的时限和要求；安全措施和应急预案。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="18"> 已能复述</label>
-        </article>
-        <article class="card" id="card-20" data-category="事故隐患与应急报告" data-text="事故上报需包括哪些内容？ 单位概况；时间地点现场；简要经过；伤亡/损失；措施；其他。 口诀：单位、时地现场、经过、伤损、措施、其他。 事故发生单位概况；事故发生的时间、地点以及事故现场情况；事故简要经过；已经造成或者可能造成的伤亡人数（含下落不明人数）和初步估计的直接经济损失；已经采取的措施；其他应当报告的情况。">
-          <div class="card-top">
-            <span class="num">20</span>
-            <span class="tag">事故隐患与应急报告</span>
-          </div>
-          <h3>事故上报需包括哪些内容？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>单位概况；时间地点现场；简要经过；伤亡/损失；措施；其他。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：单位、时地现场、经过、伤损、措施、其他。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>事故发生单位概况；事故发生的时间、地点以及事故现场情况；事故简要经过；已经造成或者可能造成的伤亡人数（含下落不明人数）和初步估计的直接经济损失；已经采取的措施；其他应当报告的情况。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="20"> 已能复述</label>
-        </article>
-        <article class="card" id="card-21" data-category="事故隐患与应急报告" data-text="事故调查报告内容？ 单位概况；经过和救援；伤亡损失；原因性质；责任处理建议；防范整改。 口诀：单位、经过救援、伤损、原因性质、责任处理、防范整改。 事故发生单位概况；事故发生经过和事故救援情况；事故造成的人员伤亡和直接经济损失；事故发生的原因和事故性质；事故责任认定以及对事故责任者的处理建议；事故防范和整改措施。">
-          <div class="card-top">
-            <span class="num">21</span>
-            <span class="tag">事故隐患与应急报告</span>
-          </div>
-          <h3>事故调查报告内容？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>单位概况；经过和救援；伤亡损失；原因性质；责任处理建议；防范整改。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：单位、经过救援、伤损、原因性质、责任处理、防范整改。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>事故发生单位概况；事故发生经过和事故救援情况；事故造成的人员伤亡和直接经济损失；事故发生的原因和事故性质；事故责任认定以及对事故责任者的处理建议；事故防范和整改措施。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="21"> 已能复述</label>
-        </article>
-        <article class="card" id="card-22" data-category="事故隐患与应急报告" data-text="事故调查分析“四不放过”原则是指什么？ 原因、责任者、职工教育、防护措施。 口诀：原因、责任、教育、措施。 事故原因没有查清不放过；事故责任者没有受到处理不放过；广大职工没有受到教育不放过；安全防护措施没有落实不放过。">
-          <div class="card-top">
-            <span class="num">22</span>
-            <span class="tag">事故隐患与应急报告</span>
-          </div>
-          <h3>事故调查分析“四不放过”原则是指什么？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>原因、责任者、职工教育、防护措施。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：原因、责任、教育、措施。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>事故原因没有查清不放过；事故责任者没有受到处理不放过；广大职工没有受到教育不放过；安全防护措施没有落实不放过。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="22"> 已能复述</label>
-        </article>
-        <article class="card" id="card-23" data-category="事故隐患与应急报告" data-text="请解释什么是安全生产“三同时”。 安全设施与主体工程同时设计、同时施工、同时投入生产和使用。 口诀：设计、施工、投用三同时。 生产经营单位新建、改建、扩建工程项目的安全设施，必须与主体工程同时设计、同时施工、同时投入生产和使用。">
-          <div class="card-top">
-            <span class="num">23</span>
-            <span class="tag">事故隐患与应急报告</span>
-          </div>
-          <h3>请解释什么是安全生产“三同时”。</h3>
-          <div class="skeleton"><span>先背骨架</span><p>安全设施与主体工程同时设计、同时施工、同时投入生产和使用。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：设计、施工、投用三同时。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>生产经营单位新建、改建、扩建工程项目的安全设施，必须与主体工程同时设计、同时施工、同时投入生产和使用。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="23"> 已能复述</label>
-        </article></div>
-    </section>
-    <section class="study-section" data-section="基础安全知识">
-      <div class="section-heading">
-        <p>Part 5</p>
-        <h2>基础安全知识</h2>
-        <span>2 题</span>
+
+      <div class="phase">
+        <div class="phase-head"><span class="name">航段五 · 入港</span><span class="when mono">录用后</span></div>
+        <div class="phase-body">
+          <label class="action" data-id="p5-1"><input type="checkbox">签署雇佣合同+接待协议(由院校出具，配合签字即可，非竞争环节)</label>
+          <label class="action" data-id="p5-2"><input type="checkbox">办理瑞典研究居留许可，开始累计永居所需居住时间</label>
+        </div>
       </div>
-      <div class="cards">
-        <article class="card" id="card-19" data-category="基础安全知识" data-text="应急管理部特种作业的范围包括哪些？ 电、焊、高、冷；煤、矿、油、冶；危化、烟爆。 口诀：电焊高冷，煤矿油冶，危化烟爆。 电工作业；焊接与热切割作业；高处作业；制冷与空调作业；煤矿安全作业；金属非金属矿山安全作业；石油天然气安全作业；冶金（有色）生产安全作业；危险化学品安全作业；烟花爆竹安全作业。">
-          <div class="card-top">
-            <span class="num">19</span>
-            <span class="tag">基础安全知识</span>
-          </div>
-          <h3>应急管理部特种作业的范围包括哪些？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>电、焊、高、冷；煤、矿、油、冶；危化、烟爆。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：电焊高冷，煤矿油冶，危化烟爆。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>电工作业；焊接与热切割作业；高处作业；制冷与空调作业；煤矿安全作业；金属非金属矿山安全作业；石油天然气安全作业；冶金（有色）生产安全作业；危险化学品安全作业；烟花爆竹安全作业。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="19"> 已能复述</label>
-        </article>
-        <article class="card" id="card-24" data-category="基础安全知识" data-text="人体中毒有哪些途径？ 呼吸道、皮肤、消化道。 口诀：呼、皮、消。 三种途径：呼吸道、皮肤、消化道。">
-          <div class="card-top">
-            <span class="num">24</span>
-            <span class="tag">基础安全知识</span>
-          </div>
-          <h3>人体中毒有哪些途径？</h3>
-          <div class="skeleton"><span>先背骨架</span><p>呼吸道、皮肤、消化道。</p></div>
-          <div class="mnemonic"><span>记忆钩子</span><p>口诀：呼、皮、消。</p></div>
-          <details>
-            <summary>展开得分答案</summary>
-            <ol><li>三种途径：呼吸道、皮肤、消化道。</li></ol>
-          </details>
-          <label class="done"><input type="checkbox" data-done="24"> 已能复述</label>
-        </article></div>
+
+      <div class="checkpoint">
+        <div class="h mono">检查点 · 2026年10月</div>
+        <p>如果主动联系了10+个课题组都没有任何实质性回应或线索，需要重新评估这条主线的可行性，不要无限期投入。</p>
+      </div>
     </section>
+
+    <section id="risk">
+      <p class="sec-title mono">SECTION 05</p>
+      <h2 class="sec-title-main">风险预警与税务补给</h2>
+
+      <div class="advisory">
+        <div class="h">海事天气警报 · 诚实的风险</div>
+        <p><b>商科/物流方向的产业博士岗位存量未验证</b>——本方针建立在方法论正确的基础上，"市场上到底有几个真实机会"需要执行航段一之后才能看到真实反馈。</p>
+        <p><b>3-4年是真实投入</b>，不是"两年镀金"，中途若发现不适合科研，沉没成本不小。</p>
+      </div>
+
+      <h2 class="sec-title-main" style="font-size:17px;margin-top:30px;">税务补给：瑞典到底扣多少</h2>
+      <p>瑞典综合最高税率约52%，但这是地方税(约32%)叠加高收入部分的国家税累进结构——<b>博士生薪资水平通常只落在地方税区间，摸不到52%那一档</b>。瑞典博士生是大学正式雇员，按"入职—50%阶段—80%阶段"薪级表递增，不交学费，享最低28天年假等完整社保。</p>
+      <div class="advisory" style="border-color:var(--steel-deep);background:#E4ECEF;">
+        <div class="h" style="color:var(--steel-deep);">需要纠正的预期</div>
+        <p>瑞典"专家税优惠"(expertskatt，25-30%免税)<b>不适用于在读博士生</b>——瑞典税务局官方明文：正在准备博士论文的学生或刚拿到博士学位的人，是不符合"研究员"减税资格的典型例子，通常要博士毕业后再发展1-2年才够格。<b>这意味着读博这4年要按标准税率交税，优惠要等博士后阶段才能用上</b>——可以把"博士后留欧1-2年"也纳入长期规划，到时候正好衔接这条税收红利。</p>
+      </div>
+      <p class="refs">来源：forskarskattenamnden.se「Tasks and Expertise」官方说明；countrytaxcalc.com「Sweden Expat Tax Guide 2026」；scholaridea.com「Ultimate Guide: PhD Salary in Sweden and Benefits for 2026」</p>
     </section>
+
   </main>
+</div>
 
-  <script>
-    const cards = Array.from(document.querySelectorAll('.card'));
-    const sections = Array.from(document.querySelectorAll('.study-section'));
-    const search = document.querySelector('#search');
-    const chips = Array.from(document.querySelectorAll('.chip'));
-    const empty = document.querySelector('#empty');
-    const progressText = document.querySelector('#progressText');
-    const progressBar = document.querySelector('#progressBar');
-    let activeFilter = 'all';
-
-    function applyFilters() {
-      const term = search.value.trim().toLowerCase();
-      let visibleCount = 0;
-      cards.forEach(card => {
-        const byCategory = activeFilter === 'all' || card.dataset.category === activeFilter;
-        const bySearch = !term || card.dataset.text.toLowerCase().includes(term);
-        const show = byCategory && bySearch;
-        card.classList.toggle('hidden', !show);
-        if (show) visibleCount += 1;
-      });
-      sections.forEach(section => {
-        const anyVisible = Array.from(section.querySelectorAll('.card')).some(card => !card.classList.contains('hidden'));
-        section.classList.toggle('hidden', !anyVisible);
-      });
-      empty.classList.toggle('show', visibleCount === 0);
-    }
-
-    chips.forEach(chip => chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeFilter = chip.dataset.filter;
-      applyFilters();
-    }));
-    search.addEventListener('input', applyFilters);
-
-    document.querySelector('#openAll').addEventListener('click', () => cards.forEach(card => card.querySelector('details').open = true));
-    document.querySelector('#closeAll').addEventListener('click', () => cards.forEach(card => card.querySelector('details').open = false));
-
-    function updateProgress() {
-      const checked = cards.filter(card => card.querySelector('input[type="checkbox"]').checked).length;
-      progressText.textContent = `已掌握 ${checked} / ${cards.length}`;
-      progressBar.style.width = `${Math.round(checked / cards.length * 100)}%`;
-    }
-    cards.forEach(card => {
-      const box = card.querySelector('input[type="checkbox"]');
-      const key = `zpmc-study-card-${box.dataset.done}`;
-      box.checked = localStorage.getItem(key) === '1';
-      box.addEventListener('change', () => {
-        localStorage.setItem(key, box.checked ? '1' : '0');
-        updateProgress();
-      });
+<script>
+const STORAGE_KEY = 'msca-route-checklist';
+async function loadChecks(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    return res && res.value ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+let saveTimer=null;
+function scheduleSave(state){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(async ()=>{
+    try{ await window.storage.set(STORAGE_KEY, JSON.stringify(state), false); }catch(e){}
+  },400);
+}
+(async function init(){
+  const state = await loadChecks();
+  document.querySelectorAll('.action').forEach(label=>{
+    const id = label.dataset.id;
+    const cb = label.querySelector('input');
+    const span = document.createElement('span');
+    span.className='txt';
+    span.textContent = label.textContent;
+    label.innerHTML='';
+    label.appendChild(cb);
+    label.appendChild(span);
+    if(state[id]){ cb.checked=true; label.classList.add('checked'); }
+    cb.addEventListener('change', ()=>{
+      state[id]=cb.checked;
+      label.classList.toggle('checked', cb.checked);
+      scheduleSave(state);
     });
-    updateProgress();
-  </script>
+  });
+})();
+</script>
 </body>
 </html>
